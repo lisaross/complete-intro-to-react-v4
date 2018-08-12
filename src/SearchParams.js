@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import pf, { ANIMALS } from "petfinder-client";
+import React from "react";
+import { ANIMALS } from "petfinder-client";
+import pf from "petfinder-client";
 
 const petfinder = pf({
   key: process.env.API_KEY,
   secret: process.env.API_SECRET
 });
-// track location animal and breed
 
-export class SearchParams extends Component {
+class Search extends React.Component {
   state = {
     location: "Seattle, WA",
     animal: "",
-    breed: ""
+    breed: "",
+    breeds: []
   };
-
   handleLocationChange = event => {
     this.setState({
       location: event.target.value
@@ -32,7 +32,6 @@ export class SearchParams extends Component {
       breed: event.target.value
     });
   };
-
   getBreeds() {
     if (this.state.animal) {
       petfinder.breed
@@ -57,16 +56,14 @@ export class SearchParams extends Component {
       });
     }
   }
-
   render() {
     return (
       <div className="search-params">
         <label htmlFor="location">
           Location
           <input
-            onChange={this.handleLocationChange}
-            type="text"
             id="location"
+            onChange={this.handleLocationChange}
             value={this.state.location}
             placeholder="Location"
           />
@@ -74,10 +71,10 @@ export class SearchParams extends Component {
         <label htmlFor="animal">
           Animal
           <select
-            onChange={this.handleAnimalChange}
-            onBlur={this.handleAnimalChange}
             id="animal"
             value={this.state.animal}
+            onChange={this.handleAnimalChange}
+            onBlur={this.handleAnimalChange}
           >
             <option />
             {ANIMALS.map(animal => (
@@ -98,7 +95,7 @@ export class SearchParams extends Component {
           >
             <option />
             {this.state.breeds.map(breed => (
-              <option value={breed} key={breed}>
+              <option key={breed} value={breed}>
                 {breed}
               </option>
             ))}
@@ -110,4 +107,4 @@ export class SearchParams extends Component {
   }
 }
 
-export default SearchParams;
+export default Search;
