@@ -9,6 +9,7 @@ const petfinder = pf({
 });
 
 class Details extends React.Component {
+<<<<<<< HEAD
   state = {
     loading: true,
     showModal: true
@@ -16,6 +17,9 @@ class Details extends React.Component {
 
   toggleModal = () => this.setState({ showModal: !this.state.showModal });
 
+=======
+  state = { loading: true, showModal: false };
+>>>>>>> a249bb3... 9
   componentDidMount() {
     petfinder.pet
       .get({
@@ -43,17 +47,19 @@ class Details extends React.Component {
       })
       .catch(err => this.setState({ error: err }));
   }
+  toggleModal = () => this.setState({ showModal: !this.state.showModal });
   render() {
     if (this.state.loading) {
       return <h1>loading … </h1>;
     }
 
     const {
+      media,
       animal,
       breed,
       location,
       description,
-      media,
+      name,
       showModal
     } = this.state;
 
@@ -70,7 +76,7 @@ class Details extends React.Component {
               <h1>Would you like to adopt {name}?</h1>
               <div className="buttons">
                 <button onClick={this.toggleModal}>Yes</button>
-                <button onClick={this.toggleModal}>Heck Yes</button>
+                <button onClick={this.toggleModal}>No</button>
               </div>
             </Modal>
           ) : null}
