@@ -11,10 +11,13 @@
     "url": "git+https://github.com/lisaross/complete-intro-to-react-v4.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Lisa Ross",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/lisaross/complete-intro-to-react-v4/issues"
   },
-  "homepage": "https://github.com/lisaross/complete-intro-to-react-v4#readme"
+  "homepage": "https://github.com/lisaross/complete-intro-to-react-v4#readme",
+  "devDependencies": {
+    "prettier": "^1.14.2"
+  }
 }
