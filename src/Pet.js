@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "@reach/router";
 
 class Pet extends Component {
   render() {
     // destructure
-    const { name, animal, breed, media, location } = this.props;
+    const { id, name, animal, breed, media, location } = this.props;
 
     let photos = [];
 
@@ -13,7 +14,7 @@ class Pet extends Component {
     }
 
     return (
-      <div className="pet">
+      <Link to={`/details/${id}`} className="pet">
         <div className="image-container">
           <img src={photos[0].value} alt={name} />
         </div>
@@ -23,7 +24,7 @@ class Pet extends Component {
             {animal} - {breed} - {location}
           </h2>
         </div>
-      </div>
+      </Link>
     );
   }
 }
