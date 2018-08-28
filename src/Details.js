@@ -9,17 +9,7 @@ const petfinder = pf({
 });
 
 class Details extends React.Component {
-<<<<<<< HEAD
-  state = {
-    loading: true,
-    showModal: true
-  };
-
-  toggleModal = () => this.setState({ showModal: !this.state.showModal });
-
-=======
   state = { loading: true, showModal: false };
->>>>>>> a249bb3... 9
   componentDidMount() {
     petfinder.pet
       .get({
