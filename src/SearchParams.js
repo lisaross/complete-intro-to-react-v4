@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { ANIMALS } from "petfinder-client";
+import pf, { ANIMALS } from "petfinder-client";
+
+const petfinder = pf({
+  key: process.env.API_KEY,
+  secret: process.env.API_SECRET
+});
 // track location animal and breed
 
 export class SearchParams extends Component {
@@ -19,6 +24,25 @@ export class SearchParams extends Component {
       animal: event.target.value
     });
   };
+
+  getBreeds() {
+    // doesn't need to be an arrow function
+    if (this.state.animal) {
+      petfinder.breed.list({ animal: this.state.animal }).then(data => {
+        if (
+          data.petfinder &&
+          data.petfinder.breeds &&
+          Array.isArray(data.petfinder.breeds.breed)
+        ) {
+          this.setState({
+            breeds: data.petfinder.breeds.breed
+          });
+        } else {
+          this.setState({ breeds: [] });
+        }
+      });
+    }
+  }
 
   render() {
     return (
