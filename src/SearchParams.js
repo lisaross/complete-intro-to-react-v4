@@ -21,7 +21,8 @@ export class SearchParams extends Component {
   };
   handleAnimalChange = event => {
     this.setState({
-      animal: event.target.value
+      animal: event.target.value,
+      breed: ""
     });
   };
 
