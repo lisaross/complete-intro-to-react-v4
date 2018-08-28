@@ -2,7 +2,7 @@ import React from "react";
 import { ANIMALS } from "petfinder-client";
 import { Consumer } from "./SearchContext";
 
-class SearchParams extends React.Component {
+class SearchBox extends React.Component {
   handleFormSubmit = event => {
     event.preventDefault();
     this.props.search();
@@ -64,4 +64,4 @@ class SearchParams extends React.Component {
   }
 }
 
-export default SearchParams;
+export default SearchBox;
