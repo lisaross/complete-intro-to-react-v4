@@ -7,13 +7,27 @@ import Details from "./Details";
 import SearchParams from "./SearchParams";
 import { Provider } from "./SearchContext";
 
+if (!process.env.API_KEY || !process.env.API_SECRET) {
+  throw new Error("no API keys");
+}
 const petfinder = pf({
   key: process.env.API_KEY,
   secret: process.env.API_SECRET
 });
 
-class App extends React.Component {
-  constructor(props) {
+interface State {
+  location: string;
+  animal: string;
+  breed: string;
+  breeds: string[];
+  handleAnimalChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleBreedChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleLocationChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  getBreeds: () => void;
+}
+
+class App extends React.Component<{}, State> {
+  constructor(props: {}) {
     super(props);
 
     this.state = {
@@ -40,12 +54,12 @@ class App extends React.Component {
       this.getBreeds
     );
   };
-  handleBreedChange = event => {
+  public handleBreedChange = event => {
     this.setState({
       breed: event.target.value
     });
   };
-  getBreeds() {
+  public getBreeds() {
     if (this.state.animal) {
       petfinder.breed
         .list({ animal: this.state.animal })
@@ -69,7 +83,7 @@ class App extends React.Component {
       });
     }
   }
-  render() {
+  public render() {
     return (
       <div>
         <header>
